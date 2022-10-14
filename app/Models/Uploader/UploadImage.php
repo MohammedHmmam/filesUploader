@@ -33,10 +33,17 @@ class UploadImage implements IUpload{
      //Move The File to its Type Directory (image - pdf - docs - sheets)
      public function upload(){
         
-        if(move_uploaded_file($this->_file['tmp_name'],IMAGES_PATH.$this->generateFileName())){
-            return true;
+        if($this->checkFileSize()){
+
+            if(move_uploaded_file($this->_file['tmp_name'],IMAGES_PATH.$this->generateFileName())){
+                return true;
+            }
+            return false;
+
+        }else{
+            return false;
         }
-        return false;
+
      }
 
 
